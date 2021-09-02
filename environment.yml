@@ -1,11 +1,13 @@
-name: your_project_name
+# Chnage project name. We recommend you to match this name to the name of the GitHub repository
+name: python_template  
 channels:
   - conda-forge
   - defaults
   - pytorch
 
 dependencies:
-  - python=3.6.12  # Change python version if necessary
+  - python=3.8  # Change python version if necessary
+  - pip
   - black=19.10b0
   - coverage=5.3
   - flake8=3.8.3
@@ -26,4 +28,8 @@ dependencies:
     - flake8-annotations==2.4.0
     - flake8-polyfill==1.0.2
     - docformatter==1.4.0
+    - mkdocs==1.1.2
+    - mkapi==1.0.14
+    - mkdocs-ivory==0.4.6
+    # Place your pip dependencies here
 
