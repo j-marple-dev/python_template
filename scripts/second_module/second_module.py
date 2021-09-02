@@ -14,4 +14,4 @@ def demo_generate_world(n_repeat: int) -> str:
     Returns:
         n_repeat time concatenated 'world'
     """
-    return "world" * n_repeat * 2
+    return "world" * n_repeat
