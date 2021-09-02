@@ -19,12 +19,12 @@ jobs:
       run: |
         conda info
         conda list
-        - name: Format with black, isort
-          shell: bash -l {0}
-          run: ./run_check.sh format
-        - name: Lint with pylint, mypy, flake8
-          shell: bash -l {0}
-          run: ./run_check.sh lint
-        - name: Test with pytest
-          shell: bash -l {0}
-          run: ./run_check.sh test
+    - name: Format with black, isort
+      shell: bash -l {0}
+      run: ./run_check.sh format
+    - name: Lint with pylint, mypy, flake8
+      shell: bash -l {0}
+      run: ./run_check.sh lint
+    - name: Test with pytest
+      shell: bash -l {0}
+      run: ./run_check.sh test
