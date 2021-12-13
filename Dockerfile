@@ -23,7 +23,7 @@ RUN sudo apt-get update && sudo apt-get install software-properties-common git -
 RUN sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt-get install python3.8 python3.8-dev python3-distutils curl -y
 RUN sudo ln -s /usr/bin/pip3 /usr/bin/pip && \
     sudo ln -s /usr/bin/python3.8 /usr/bin/python
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall && python -m pip install --upgrade pip
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall && python -m pip install --upgrade pip && rm get-pip.py
 
 # Terminal environment
 RUN git clone https://github.com/JeiKeiLim/my_term.git \
@@ -55,6 +55,11 @@ RUN cd /home/user/.vim_runtime/my_plugins \
 
 # Fix error messages with vim plugins
 RUN cd /home/user/.vim_runtime/sources_non_forked && rm -rf tlib vim-fugitive && git clone https://github.com/tomtom/tlib_vim.git tlib && git clone https://github.com/tpope/vim-fugitive.git 
+
+COPY ./requirements.txt ./
+COPY ./requirements-dev.txt ./
+RUN python -m pip install -r requirements.txt && python -m pip install -r requirements-dev.txt
+RUN rm requirements.txt requirements-dev.txt
 
 # Add PATH
 RUN echo "export PATH=/home/user/.local/bin:\$PATH" >> /home/user/.bashrc
