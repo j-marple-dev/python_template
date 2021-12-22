@@ -64,3 +64,20 @@ RUN rm requirements.txt requirements-dev.txt
 # Add PATH
 RUN echo "export PATH=/home/user/.local/bin:\$PATH" >> /home/user/.bashrc
 RUN echo "export LC_ALL=C.UTF-8 && export LANG=C.UTF-8" >> /home/user/.bashrc
+
+# Install zsh with powerlevel10k theme
+ARG USE_ZSH=true
+
+RUN sudo apt-get install -y zsh && \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+COPY res/.zshrc res/.p10k.zsh /home/user/
+RUN sudo chown user:user .zshrc .p10k.zsh
+
+RUN if [ "$USE_ZSH" = "true" ]; then \
+    sudo chsh -s $(which zsh) $(whoami) && \
+    echo "\n# Custom settings" >> /home/user/.zshrc && \
+    echo "export PATH=/home/user/.local/bin:\$PATH" >> /home/user/.zshrc && \
+    echo "export LC_ALL=C.UTF-8 && export LANG=C.UTF-8" >> /home/user/.zshrc; \
+    fi
+
