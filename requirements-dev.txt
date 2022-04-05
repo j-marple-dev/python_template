@@ -19,3 +19,4 @@ docformatter==1.4.0
 mkdocs==1.2.3
 mkapi==1.0.14
 mkdocs-ivory==0.4.6
+click==8.0.2
