@@ -1,6 +1,6 @@
 black==23.7.0
 coverage==5.3
-flake8==6.0.0
+flake8==4.0.1
 flake8-bugbear==20.1.4
 flake8-docstrings==1.5.0
 isort==5.5.3
@@ -13,7 +13,7 @@ pytest-cov==2.10.1
 pytest-flake8==1.1.1
 pytest-mypy==0.7.0
 pytest-pylint==0.19.0
-flake8-annotations==3.0.1
+flake8-annotations==2.9.0
 flake8-polyfill==1.0.2
 docformatter==1.4.0
 mkdocs==1.2.3
