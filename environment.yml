@@ -3,14 +3,12 @@ name: python_template
 channels:
   - conda-forge
   - defaults
-  - pytorch
 
 dependencies:
-  - python=3.8  # Change python version if necessary
+  - python=3.10  # Change python version if necessary
   - pip
   # Place your conda dependencies here
   - pip:
     # Place your pip dependencies in requirements.txt
     - -r requirements.txt
     - -r requirements-dev.txt
-
