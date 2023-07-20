@@ -22,7 +22,7 @@ ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 RUN sudo apt-get update && sudo apt-get -y install wget curl git
-RUN curl -s https://raw.githubusercontent.com/JeiKeiLim/my_term/main/run.sh | /bin/bash
+RUN curl -s https://raw.githubusercontent.com/JeiKeiLim/my_term/main/run.sh | /bin/bash -s -- -vim vim
 
 # install zsh & set theme powerlevel10k
 RUN sudo apt-get update && sudo apt-get install -y zsh && \
