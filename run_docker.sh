@@ -27,12 +27,18 @@ elif [ "$2" = "bash" ]; then
  $RUN_SHELL   CMD_ARGS=${CMD_ARGS[*]:2}
 fi
 
+if [ "$ARCH" = "aarch64" ]; then
+    DOCKER_FILE=./docker/Dockerfile.aarch64
+else
+    DOCKER_FILE=./docker/Dockerfile
+fi
+
 if [ "$1" = "build" ]; then
     if [ "$RUN_SHELL" = "/bin/bash" ]; then
         CMD_ARGS="$CMD_ARGS --build-arg USE_ZSH=false"
     fi
     echo "Building a docker image with tagname $DOCKER_TAG and arguments $CMD_ARGS"
-    docker build . -t $DOCKER_TAG $CMD_ARGS --build-arg UID=`id -u` --build-arg GID=`id -g`
+    docker build . -t $DOCKER_TAG -f $DOCKER_FILE $CMD_ARGS --build-arg UID=`id -u` --build-arg GID=`id -g`
 elif [ "$1" = "run" ]; then
     if test -f "$HOME/.gitconfig"; then
         CMD_ARGS="$CMD_ARGS -v $HOME/.gitconfig:/home/user/.gitconfig"
