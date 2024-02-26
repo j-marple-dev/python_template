@@ -65,6 +65,14 @@ elif [ "$1" = "exec" ]; then
     last_cont_id=$(tail -1 $PWD/.last_exec_cont_id.txt)
     docker start ${last_cont_id}
     docker exec -ti ${last_cont_id} $RUN_SHELL
+elif [ "$1" = "kill" ]; then
+    containers=$(docker ps -f "ancestor=$DOCKER_TAG" -q)
+    if [ -z $containers ]; then
+        echo "No $DOCKER_TAG container has found!"
+    else
+        echo "Killing ${#containers[@]} containers of $DOCKER_TAG"
+        docker kill $containers
+    fi
 else
     echo ""
     echo "============= $0 [Usages] ============"
@@ -72,6 +80,7 @@ else
     echo "      build --no-cache : Build docker image without cache"
     echo "2) $0 run : launch a new docker container"
     echo "3) $0 exec : execute last container launched"
+    echo "4) $0 kill : Kill all containers tagged as $DOCKER_TAG"
 fi
 
 
